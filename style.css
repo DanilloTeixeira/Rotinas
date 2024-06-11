@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #121212;
+  background-color: #000000;
   color: #000000;
   margin: 0;
   padding: 0;
@@ -10,10 +10,11 @@ body {
   height: 100vh;
   flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 h1 {
-  color: #1E90FF;
+  color: #b69100;
   text-align: center;
 }
 
@@ -106,24 +107,12 @@ h1 {
   color: #ff0000;
 }
 
-/* Estilos para dispositivos menores, como celulares */
-@media only screen and (max-width: 600px) {
-  body {
-    flex-direction: column;
-  }
+.img {
+  text-align: center;
+}
 
-  .todo-item {
-    flex-direction: column;
-  }
-
-  .todo-text {
-    margin-bottom: 8px;
-  }
-
-  .edit-button,
-  .delete-button {
-    margin: 10px 0;
-  }
+.img img {
+  max-width: 300px;
 }
 
 /* Define as cores que deseja que o texto pisque */
@@ -145,4 +134,10 @@ h1 {
 .piscante {
   animation: blink 1s linear infinite;
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .piscante {
+    font-size: 14px;
+  }
 }
