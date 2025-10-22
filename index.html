@@ -270,7 +270,7 @@
             const texto = elemento.textContent;
 
             // Verifica se o texto é válido (não é placeholder)
-            if (texto === '--/--/----' || texto === '--------' || texto === 'C_--------') {
+            if (texto === '--.--.----' || texto === '--------' || texto === 'C_--------') {
                 return;
             }
 
@@ -295,7 +295,7 @@
             const dias = parseInt(document.getElementById('diasValidade').value);
 
             if (!dataAtual || isNaN(dias)) {
-                document.getElementById('dataValidadeResult').textContent = '--/--/----';
+                document.getElementById('dataValidadeResult').textContent = '--.--.----';
                 return;
             }
 
