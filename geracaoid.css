@@ -1,0 +1,327 @@
+/* ===============================
+   RESET E BASE
+==================================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #111;
+}
+
+/* ===============================
+   CONTAINER E HEADER
+==================================*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    background-color: #eba40b;
+    color: #000;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+.subtitle {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #0011ff;
+}
+
+/* ===============================
+   GRID DE FERRAMENTAS
+==================================*/
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.tool-card {
+    background: #eba40b;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.35);
+}
+
+.tool-card h2 {
+    color: #000;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    padding-bottom: 10px;
+}
+
+/* ===============================
+   FORMULÁRIOS E INPUTS
+==================================*/
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #222;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: 0 0 5px rgba(235,164,11,0.6);
+}
+
+/* ===============================
+   RESULTADOS E BOTÕES DE CÓPIA
+==================================*/
+.result-box {
+    background: #f5f7fa;
+    border-left: 4px solid #000;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.result-box-with-copy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-content {
+    flex: 1;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.result-value {
+    font-size: 1.2em;
+    color: #000;
+    font-weight: bold;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background: #000;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.copy-btn:hover {
+    background: #333;
+    transform: scale(1.05);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.copy-btn.copied {
+    background: #10b981;
+}
+
+/* ===============================
+   TEXTOS AUXILIARES
+==================================*/
+.info-text {
+    font-size: 0.9em;
+    color: #333;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* ===============================
+   SEÇÕES DE SENHA
+==================================*/
+.section {
+    background: #eba40b;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.section-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: center;
+}
+
+.password-display {
+    background: #ffffff;
+    border-left: 4px solid #000;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #222;
+}
+
+.password-display.empty {
+    color: #777;
+    font-style: italic;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.btn-generate,
+.btn-copy {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.btn-generate {
+    background: #000;
+    color: #fff;
+}
+
+.btn-copy {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+}
+
+.btn-generate:hover,
+.btn-copy:hover {
+    transform: scale(1.05);
+}
+
+.btn-copy:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgb(253, 0, 0);
+    
+}
+.btn-copy.copied {
+    background: #10b981;
+}
+
+/* ===============================
+   CONFIGURAÇÕES DE SENHA
+==================================*/
+.range-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.length-display {
+    font-weight: 700;
+    color: #000;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-top: 8px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.info-box {
+    background: #ffffff;
+    border-left: 4px solid #000;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 0.95em;
+    color: #222;
+}
+
+/* ===============================
+   RESPONSIVIDADE
+==================================*/
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-box-with-copy {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .copy-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+}

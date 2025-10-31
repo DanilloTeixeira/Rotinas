@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe Legado - Geração de ID</title> 
+  <link rel="stylesheet" href="geracaoid.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🆔 Geração de ID de Usuário</h1>      
+     
+      <a href="./index.html" data-page="home" class="active">🏠 HOME</a>
+    </header>
+
+    <div class="tool-card">
+      
+      
+      <div class="form-group">
+        <label for="nomeCompleto">Nome Completo:</label>
+        <input type="text" id="nomeCompleto" placeholder="Ex: Danillo Cesar" oninput="gerarID()">
+      </div>
+
+      <div class="result-box">
+        <div class="result-box-with-copy">
+          <div class="result-content">
+            <div class="result-label">ID Principal:</div>
+            <div class="result-value" id="idPrincipal">--------</div>
+          </div>
+          <button class="copy-btn" onclick="copiarTexto('idPrincipal')">
+            📋 Copiar
+          </button>
+        </div>
+      </div>
+      <p class="info-text">
+        Obs: Se o ID já existir, remova caracteres do sobrenome.
+      </p>
+
+      <div class="result-box" style="margin-top: 15px;">
+        <div class="result-box-with-copy">
+          <div class="result-content">
+            <div class="result-label">ID com Prefixo:</div>
+            <div class="result-value" id="idPrefixo">C_--------</div>
+          </div>
+          <button class="copy-btn" onclick="copiarTexto('idPrefixo')">
+            📋 Copiar
+          </button>
+        </div>
+      </div>
+
+      <p class="info-text">
+        Obs: Se o ID já existir, remova caracteres do sobrenome.
+      </p>
+    </div>
+  </div>
+
+  <script src="geracaoid.js"></script>
+</body>
+</html>
+

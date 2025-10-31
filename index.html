@@ -1,189 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src=""></script>
-    <title>Equipe Legado</title> 
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe Legado - Ferramentas</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🛠️ FERRAMENTAS</h1>
-            <p class="subtitle">Sistema de cálculo de validade e geração de IDs</p>
-            <link rel="stylesheet" href="style.css">
-        </header>
+  <div class="app-container">
+    <!-- Menu lateral -->
+    <nav class="sidebar">
+      <h2>🛠️ Equipe Legado</h2>
+      <ul>
+        <li><a href="#" data-page="home" class="active">🏠 Início</a></li>
+        <li><a href="./validade.html" data-page="validade">📅 Cálculo de Validade</a></li>
+        <li><a href="./geracaoid.html" data-page="id">🆔 Geração de ID</a></li>
+        <li><a href="./senha.html" data-page="senha">🔐 Gerador de Senhas</a></li>
+        <li><a href="#" data-page="config">⚙️ Configurações</a></li>
+      </ul>
+    </nav>
+    <!-- Área de conteúdo -->
+    <main class="content">
+      <div id="page-content">
+        <!-- Aqui o conteúdo será carregado dinamicamente -->
+      </div>
+    </main>
+  </div>
 
-        <div class="tools-grid">
-            <!-- Ferramenta 1: Cálculo de Validade -->
-            <div class="tool-card">
-                <h2>📅 Cálculo de Validade</h2>                
-                <div class="form-group">
-                    <label for="dataAtual">Data Atual:</label>
-                    <input type="date" id="dataAtual">
-                </div>
-
-                <div class="form-group">
-                    <label for="diasValidade">Quantidade de Dias:</label>
-                    <input type="number" id="diasValidade" placeholder="Ex: 30 - 90 - 180" min="0">
-                </div>
-
-                <div class="result-box" id="resultadoValidade">
-                    <div class="result-box-with-copy">
-                        <div class="result-content">
-                            <div class="result-label">Data de Validade:</div>
-                            <div class="result-value" id="dataValidadeResult">--/--/----</div>
-                        </div>
-                        <button class="copy-btn" onclick="copiarTexto('dataValidadeResult', this)">
-                            📋 Copiar
-                        </button>
-                    </div>
-                    
-                </div>
-                <p class="info-text">
-                   Obs: Transação 180 dias, usuários Terceiro 90 dias e usuários Ambev 31.12.9999.
-                </p>
-            </div>
-
-            <!-- Ferramenta 2: Geração de ID -->
-            <div class="tool-card">
-                <h2>🆔 Geração de ID de Usuário</h2>
-                
-                <div class="form-group">
-                    <label for="nomeCompleto">Nome Completo:</label>
-                    <input type="text" id="nomeCompleto" placeholder="Ex: Danillo Cesar">
-                </div>
-
-                <div class="result-box">
-                    <div class="result-box-with-copy">
-                        <div class="result-content">
-                            <div class="result-label">ID Principal:</div>
-                            <div class="result-value" id="idPrincipal">--------</div>
-                        </div>
-                        <button class="copy-btn" onclick="copiarTexto('idPrincipal', this)">
-                            📋 Copiar
-                        </button>
-                    </div>
-                </div>
-                <p class="info-text">
-                   Obs: Se o ID já existir, remova caracteres do sobrenome.
-                </p>
-
-                <div class="result-box" style="margin-top: 15px;">
-                    <div class="result-box-with-copy">
-                        <div class="result-content">
-                            <div class="result-label">ID com Prefixo:</div>
-                            <div class="result-value" id="idPrefixo">C_--------</div>
-                        </div>
-                        <button class="copy-btn" onclick="copiarTexto('idPrefixo', this)">
-                            📋 Copiar
-                        </button>
-                    </div>
-                </div>
-
-                <p class="info-text">
-                   Obs: Se o ID já existir, remova caracteres do sobrenome.
-                </p>
-            </div>
-        </div>
-    </div>
-        <!-- Seção: Senha Gerada -->
-        <div class="section">
-            <div class="section-title">Senha Gerada</div>
-            <div class="password-display empty" id="passwordDisplay">
-                Nenhuma senha gerada ainda
-            </div>
-            <div class="button-group">
-                <button class="btn-generate" onclick="gerarSenha()">
-                    🎲 Gerar Senha
-                </button>
-                <button class="btn-copy" id="copyBtn" onclick="copiarSenha()" disabled>
-                    📋 Copiar
-                </button>
-            </div>
-        </div>
-
- <!-- Seção: Configurações -->
-        <div class="section">
-            <div class="section-title">Configurações da Senha</div>
-            
-            <div class="form-group">
-                <label>Tamanho da Senha: <span class="length-display" id="lengthValue">12</span></label>
-                <div class="range-container">
-                    <span style="color: #000000; font-size: 0.9em;">4</span>
-                    <input type="range" id="passwordLength" min="4" max="20" value="12" oninput="atualizarTamanho()">
-                    <span style="color: #000000; font-size: 0.9em;">20</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Incluir Caracteres:</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="includeUppercase" checked>
-                        <label for="includeUppercase">Maiúsculas (A-Z)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="includeLowercase" checked>
-                        <label for="includeLowercase">Minúsculas (a-z)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="includeNumbers" checked>
-                        <label for="includeNumbers">Números (0-9)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="includeSpecial" checked>
-                        <label for="includeSpecial">Especiais (!@#$%&*)</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Seção: Senha Baseada em Referência -->
-        <div class="section">
-            <div class="section-title">Senha Baseada em Referência</div>
-            
-            <div class="form-group">
-                <label>Tipo de Prefixo:</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="radio" id="prefixoSRV" name="prefixo" value="SRV" checked>
-                        <label for="prefixoSRV">SRV</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="radio" id="prefixoSYS" name="prefixo" value="SYS">
-                        <label for="prefixoSYS">SYS</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="referenceInput">Dados de Referência:</label>
-                <input type="text" id="referenceInput" placeholder="Ex: SRV_PPDS, SYS_DATABASE, etc." oninput="gerarSenhaReferencia()">
-            </div>
-
-            <div class="password-display empty" id="passwordReferenceDisplay">
-                Digite uma referência para gerar
-            </div>
-
-            <div class="button-group">
-                <button class="btn-generate" onclick="gerarSenhaReferencia()">
-                    🎲 Gerar Senha com Referência
-                </button>
-                <button class="btn-copy" id="copyBtnReference" onclick="copiarSenhaReferencia()" disabled>
-                    📋 Copiar
-                </button>
-            </div>
-
-            <div class="info-box">
-                💡 Selecione SRV ou SYS, digite a referência (ex: SRV_PPDS) e gere uma senha no formato: <strong>SRV@brp#45ppDs2</strong>
-            </div>
-        </div>
-    </div>       
-
-
-<script src="script.js"></script>
-    
+  <script src="./script.js"></script>
 </body>
 </html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe Legado</title> 
+  <link rel="stylesheet" href="senha.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📅 Cálculo de Validade</h1> 
+      <a href="./index.html" data-page="home" class="active">🏠 HOME</a>
+    </header>
+
+    <!-- Seção: Senha Gerada -->
+    <div class="section">
+      <div class="section-title">Senha Gerada</div>
+      <div class="password-display empty" id="passwordDisplay">
+        Nenhuma senha gerada ainda
+      </div>
+      <div class="button-group">
+        <button class="btn-generate" onclick="gerarSenha()">🎲 Gerar Senha</button>
+        <button class="btn-copy" id="copyBtn" onclick="copiarSenha()" disabled>📋 Copiar</button>
+      </div>
+    </div>
+
+    <!-- Seção: Configurações -->
+    <div class="section">
+      <div class="section-title">Configurações da Senha</div>
+      
+      <div class="form-group">
+        <label>Tamanho da Senha: <span class="length-display" id="lengthValue">12</span></label>
+        <div class="range-container">
+          <span style="color:#000;font-size:0.9em;">4</span>
+          <input type="range" id="passwordLength" min="4" max="20" value="12" oninput="atualizarTamanho()">
+          <span style="color:#000;font-size:0.9em;">20</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Incluir Caracteres:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="includeUppercase" checked>
+            <label for="includeUppercase">Maiúsculas (A-Z)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="includeLowercase" checked>
+            <label for="includeLowercase">Minúsculas (a-z)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="includeNumbers" checked>
+            <label for="includeNumbers">Números (0-9)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="includeSpecial" checked>
+            <label for="includeSpecial">Especiais (!@#$%&*)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção: Senha Baseada em Referência -->
+    <div class="section">
+      <div class="section-title">Senha Baseada em Referência</div>
+      
+      <div class="form-group">
+        <label>Tipo de Prefixo:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="radio" id="prefixoSRV" name="prefixo" value="SRV" checked>
+            <label for="prefixoSRV">SRV</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="radio" id="prefixoSYS" name="prefixo" value="SYS">
+            <label for="prefixoSYS">SYS</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="referenceInput">Dados de Referência:</label>
+        <input type="text" id="referenceInput" placeholder="Ex: SRV_PPDS, SYS_DATABASE, etc." oninput="gerarSenhaReferencia()">
+      </div>
+
+      <div class="password-display empty" id="passwordReferenceDisplay">
+        Digite uma referência para gerar
+      </div>
+
+      <div class="button-group">
+        <button class="btn-generate" onclick="gerarSenhaReferencia()">🎲 Gerar Senha com Referência</button>
+        <button class="btn-copy" id="copyBtnReference" onclick="copiarSenhaReferencia()" disabled>📋 Copiar</button>
+      </div>
+
+      <div class="info-box">
+        💡 Selecione SRV ou SYS, digite a referência (ex: SRV_PPDS) e gere uma senha no formato: 
+        <strong>SRV@brp#45ppDs2</strong>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
