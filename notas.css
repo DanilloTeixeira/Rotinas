@@ -1,0 +1,94 @@
+*{box-sizing:border-box}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background:#eba40b;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  padding:30px 10px;
+}
+.app{width:100%;max-width:980px}
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+.app-header h1{margin:0;font-size:20px}
+.header-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+#searchInput{
+  padding:8px 10px;
+  border-radius:6px;border:1px solid #bbb;
+  min-width:240px;
+}
+#addNoteBtn{
+  background:#1a73e8;color:white;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600;
+}
+#addNoteBtn:hover{background:#125cb0}
+
+/* container de notas */
+.notes-container{display:flex;flex-direction:column;gap:18px}
+
+/* cartão da nota (estilo GRC) */
+.note-card{
+  border:2px solid #222;
+  border-radius:6px;
+  overflow:hidden;
+  background:#9c9c9c;
+  box-shadow:0 3px 8px rgba(0,0,0,0.08);
+  font-weight: 600;
+}
+
+/* faixa de status (verde/âmbar/vermelho conforme status) */
+.note-top{
+  display:flex;
+  flex-direction:column;
+}
+.note-status{
+  text-align:center;padding:6px 8px;font-weight:700;color:#fff;
+}
+.note-title-row{
+  background:#fde9b2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:10px;
+  border-top:1px solid #ddd;
+}
+.note-title-row input.title-input{
+  font-weight:700;border:none;background:transparent;text-align:center;width:70%;
+  font-size:16px;
+}
+.note-title-row input.title-input[readonly]{opacity:0.95}
+.note-title-row button{padding:6px 10px;border-radius:5px;border:1px solid #aaa;background:#f5f5f5;cursor:pointer}
+.note-body{
+  padding:18px 20px;
+  line-height:1.6;color:#222;
+  min-height:120px;
+}
+.note-body .display-text{white-space:pre-wrap}
+.note-body textarea.edit-area{
+  width:100%;min-height:120px;border:1px solid #ccc;border-radius:6px;padding:8px;font-size:14px;resize:vertical;
+}
+
+/* footer com botões */
+.note-footer{
+  display:flex;
+  justify-content:center;
+  gap:12px;padding:12px;border-top:1px solid #e6e6e6;background:#fafafa;
+}
+.note-footer button{
+  padding:8px 14px;border-radius:6px;border:1px solid #9aa;cursor:pointer;font-weight:600;background:#fff;
+}
+.note-footer button.primary{background:#1a73e8;color:#fff;border-color:#125cb0}
+.note-footer button.danger{background:#ff6b6b;color:#fff;border-color:#c94a4a}
+.note-footer button:hover{filter:brightness(.98)}
+
+/* mensagem quando não há notas */
+.no-notes{padding:30px;text-align:center;color:#666;background:#fff;border-radius:6px;border:1px solid #ddd}
