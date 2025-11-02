@@ -5,44 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Equipe Legado - Geração de ID</title> 
   <link rel="stylesheet" href="geracaoid.css">
+  <style>
+    /* Estilo para o botão HOME */
+    .home-link {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .home-link a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff; /* azul */
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .home-link a:hover {
+      background-color: #0056b3; /* azul mais escuro */
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>📅 Cálculo de Validade</h1>    
-      <a href="./index.html" data-page="home" class="meu-link">🏠 HOME</a>
+
+      <!-- Botão HOME abaixo do título -->
+      <div class="home-link">
+        <a href="./index.html" data-page="home" class="meu-link">🏠 HOME</a>
+      </div>
     </header>
-<div class="tools-grid">
-            <!-- Ferramenta 1: Cálculo de Validade -->
-            <div class="tool-card">
-                <h2></h2>                
-                <div class="form-group">
-                    <label for="dataAtual">Data Atual:</label>
-                    <input type="date" id="dataAtual">
-                </div>
 
-                <div class="form-group">
-                    <label for="diasValidade">Quantidade de Dias:</label>
-                    <input type="number" id="diasValidade" placeholder="Ex: 30 - 90 - 180" min="0">
-                </div>
+    <div class="tools-grid">
+      <!-- Ferramenta 1: Cálculo de Validade -->
+      <div class="tool-card">
+        <h2></h2>                
+        <div class="form-group">
+          <label for="dataAtual">Data Atual:</label>
+          <input type="date" id="dataAtual">
+        </div>
 
-                <div class="result-box" id="resultadoValidade">
-                    <div class="result-box-with-copy">
-                        <div class="result-content">
-                            <div class="result-label">Data de Validade:</div>
-                            <div class="result-value" id="dataValidadeResult">--/--/----</div>
-                        </div>
-                        <button class="copy-btn" onclick="copiarTexto('dataValidadeResult', this)">
-                            📋 Copiar
-                        </button>
-                    </div>
-                    
-                </div>
-                <p class="info-text">
-                   Obs: Transação 180 dias, usuários Terceiro 90 dias e usuários Ambev 31.12.9999.
-                </p>
+        <div class="form-group">
+          <label for="diasValidade">Quantidade de Dias:</label>
+          <input type="number" id="diasValidade" placeholder="Ex: 30 - 90 - 180" min="0">
+        </div>
+
+        <div class="result-box" id="resultadoValidade">
+          <div class="result-box-with-copy">
+            <div class="result-content">
+              <div class="result-label">Data de Validade:</div>
+              <div class="result-value" id="dataValidadeResult">--/--/----</div>
             </div>
-            <script src="validade.js"></script>
-</div>
-</head>
+            <button class="copy-btn" onclick="copiarTexto('dataValidadeResult', this)">
+              📋 Copiar
+            </button>
+          </div>
+        </div>
+        <p class="info-text">
+          Obs: Transação 180 dias, usuários Terceiro 90 dias e usuários Ambev 31.12.9999.
+        </p>
+      </div>
+    </div>
+
+    <script src="validade.js"></script>
+  </div>
+</body>
 </html>
+

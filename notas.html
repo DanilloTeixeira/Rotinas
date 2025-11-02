@@ -3,28 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Info Gerais Tickets </title>
-  <link rel="stylesheet" href="notas.css" />
+  <title>Info Gerais Tickets</title>
+  <link rel="stylesheet" href="notas.css" />  
 </head>
 <body>
+  <div class="container">
   <div class="app">
     <header class="app-header">
-      <h1>Informção Gerais - Notas de Fechamentos </h1>
+      <h1>📋 Informação Gerais - Notas de Fechamentos</h1>
+      <div>
       <div class="header-actions">
         <button id="addNoteBtn">+ Adicionar Nota</button>
         <input id="searchInput" placeholder="Buscar (título, texto, status)..." />
+      </div>  
+      </div>
+</div>
+      <!-- Botão HOME abaixo das ações -->
+      <div class="home-link">
+             <a href="./index.html" class="home-btn">🏠 HOME</a>
       </div>
     </header>
 
     <main id="notesContainer" class="notes-container">
       <!-- Notas serão renderizadas aqui via script.js -->
     </main>
-
-    
   </div>
 
   <script src="notas.js"></script>
 </body>
 </html>
+
+
+
+
 
 

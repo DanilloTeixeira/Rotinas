@@ -7,6 +7,59 @@ body{
   justify-content:center;
   padding:30px 10px;
 }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+app-header {
+  background-color: #f0a500; /* fundo laranja */
+  color: #000;
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.app-header h1 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.header-actions button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header-actions input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 250px;
+}
+
+.home-link {
+  margin-top: 10px;
+}
+
+.home-link .home-btn {
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
 .app{width:100%;max-width:980px}
 .app-header{
   display:flex;
@@ -92,3 +145,25 @@ body{
 
 /* mensagem quando não há notas */
 .no-notes{padding:30px;text-align:center;color:#666;background:#fff;border-radius:6px;border:1px solid #ddd}
+
+/* Estilo para o botão HOME */
+.home-link {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center; /* centraliza o botão */
+}
+
+.home-link a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* azul */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.home-link a:hover {
+  background-color: #0056b3; /* azul mais escuro */
+}

@@ -5,12 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Equipe Legado</title> 
   <link rel="stylesheet" href="senha.css">
+  <style>
+    /* Estilo para o botão HOME */
+    .home-link {
+      margin-top: 10px;
+    }
+
+    .home-link a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff; /* azul */
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .home-link a:hover {
+      background-color: #0056b3; /* azul mais escuro */
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>📅 Cálculo de Validade</h1> 
-      <a href="./index.html" data-page="home" class="active">🏠 HOME</a>
+      
+      <!-- Botão HOME abaixo do título -->
+      <div class="home-link">
+        <a href="./index.html" data-page="home" class="active">🏠 HOME</a>
+      </div>
     </header>
 
     <!-- Seção: Senha Gerada -->

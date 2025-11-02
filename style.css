@@ -9,6 +9,14 @@ body {
   height: 100vh;
 }
 
+.media-card1 {
+  background: url(https://i.pinimg.com/videos/thumbnails/originals/67/3b/23/673b230a70bf4bd0ed9d7d8ac661646a.0000000.jpg) center/cover;
+  height: 970px;
+  width: 100%;
+  
+
+}
+
 /* Sidebar */
 .sidebar {
   width: 240px;
