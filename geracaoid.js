@@ -1,51 +1,58 @@
-// ===========================================
-// 🆔 GERAR ID BASEADO EM NOME
-// ===========================================
-function gerarID() {
-  const nomeCompleto = document.getElementById('nomeCompleto').value.trim().toUpperCase();
+const resetIds = () => {
+  document.querySelector('#idPrincipal').textContent = '--------';
+  document.querySelector('#idPrefixo').textContent = 'C_--------';
+};
 
-  // Se o campo estiver vazio
-  if (!nomeCompleto) {
-    document.getElementById('idPrincipal').textContent = '--------';
-    document.getElementById('idPrefixo').textContent = 'C_--------';
+// Mantém a regra original: 6 letras do sobrenome + 2 letras do nome.
+const gerarID = () => {
+  const input = document.querySelector('#nomeCompleto');
+  const name = input.value.trim().toUpperCase();
+
+  if (!name) {
+    resetIds();
     return;
   }
 
-  // Limpar caracteres especiais e múltiplos espaços
-  const nomeClean = nomeCompleto.replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ');
-  const partes = nomeClean.split(' ');
+  const cleanName = name.replace(/[^A-Z\s]/g, '').replace(/\s+/g, ' ').trim();
+  const parts = cleanName.split(' ');
 
-  if (partes.length === 0 || partes[0] === '') {
-    document.getElementById('idPrincipal').textContent = '--------';
-    document.getElementById('idPrefixo').textContent = 'C_--------';
+  if (!cleanName || !parts[0]) {
+    resetIds();
     return;
   }
 
-  const nome = partes[0];
-  const sobrenome = partes.length > 1 ? partes[partes.length - 1] : '';
-  let id = '';
+  const firstName = parts[0];
+  const lastName = parts.length > 1 ? parts[parts.length - 1] : '';
+  let id;
 
-  // Regra principal: 6 letras do sobrenome + 2 do nome
-  if (sobrenome.length >= 6) {
-    id = sobrenome.substring(0, 6) + nome.substring(0, 2);
+  if (lastName.length >= 6) {
+    id = lastName.substring(0, 6) + firstName.substring(0, 2);
   } else {
-    id = sobrenome;
-    const restante = 8 - sobrenome.length;
-    id += nome.substring(0, restante);
+    id = lastName + firstName.substring(0, 8 - lastName.length);
   }
 
   id = id.substring(0, 8).padEnd(8, '0');
+  document.querySelector('#idPrincipal').textContent = id;
+  document.querySelector('#idPrefixo').textContent = `C_${id}`;
+};
 
-  document.getElementById('idPrincipal').textContent = id;
-  document.getElementById('idPrefixo').textContent = 'C_' + id;
-}
+const copyId = async (targetId, button) => {
+  const value = document.querySelector(`#${targetId}`).textContent;
+  const originalText = button.textContent;
 
-// ===========================================
-// 📋 COPIAR TEXTO
-// ===========================================
-function copiarTexto(elementId) {
-  const texto = document.getElementById(elementId).textContent;
-  navigator.clipboard.writeText(texto).then(() => {
-    alert(`✅ Copiado: ${texto}`);
+  try {
+    await navigator.clipboard.writeText(value);
+    button.textContent = 'Copiado!';
+  } catch {
+    button.textContent = 'Erro ao copiar';
+  }
+
+  setTimeout(() => { button.textContent = originalText; }, 1800);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('#nomeCompleto').addEventListener('input', gerarID);
+  document.querySelectorAll('[data-copy-target]').forEach((button) => {
+    button.addEventListener('click', () => copyId(button.dataset.copyTarget, button));
   });
-}
+});

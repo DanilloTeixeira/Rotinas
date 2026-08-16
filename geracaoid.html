@@ -3,83 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equipe Legado - Geração de ID</title> 
+  <meta name="theme-color" content="#061f57">
+  <title>Geração de ID - Equipe Legado</title>
   <link rel="stylesheet" href="geracaoid.css">
-  <style>
-    /* Estilo para o botão HOME */
-    .home-link {
-      margin-top: 10px;
-      margin-bottom: 20px;
-      text-align: center; /* centraliza o botão */
-    }
-
-    .home-link a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff; /* azul */
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .home-link a:hover {
-      background-color: #0056b3; /* azul mais escuro */
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🆔 Geração de ID de Usuário</h1>      
-
-      <!-- Botão HOME destacado abaixo do título -->
-      <div class="home-link">
-        <a href="./index.html" data-page="home" class="active">🏠 HOME</a>
-      </div>
+  <main class="container">
+    <header class="page-header">
+      <a class="home-link" href="./index.html">← Voltar ao início</a>
+      <h1>Geração de ID de Usuário</h1>
+      <p>Crie IDs a partir do nome completo.</p>
     </header>
 
-    <div class="tool-card">
+    <section class="card" aria-labelledby="generator-title">
+      <h2 id="generator-title">Dados do usuário</h2>
       <div class="form-group">
-        <label for="nomeCompleto">Nome Completo:</label>
-        <input type="text" id="nomeCompleto" placeholder="Ex: Danillo Cesar" oninput="gerarID()">
+        <label for="nomeCompleto">Nome completo</label>
+        <input type="text" id="nomeCompleto" placeholder="Ex.: Danillo Cesar" autocomplete="name">
       </div>
 
-      <div class="result-box">
-        <div class="result-box-with-copy">
-          <div class="result-content">
-            <div class="result-label">ID Principal:</div>
-            <div class="result-value" id="idPrincipal">--------</div>
+      <div class="results">
+        <article class="result-box">
+          <div>
+            <p class="result-label">ID principal</p>
+            <output class="result-value" id="idPrincipal">--------</output>
           </div>
-          <button class="copy-btn" onclick="copiarTexto('idPrincipal')">
-            📋 Copiar
-          </button>
-        </div>
-      </div>
-      <p class="info-text">
-        Obs: Se o ID já existir, remova caracteres do sobrenome.
-      </p>
+          <button class="copy-btn" type="button" data-copy-target="idPrincipal">Copiar</button>
+        </article>
 
-      <div class="result-box" style="margin-top: 15px;">
-        <div class="result-box-with-copy">
-          <div class="result-content">
-            <div class="result-label">ID com Prefixo:</div>
-            <div class="result-value" id="idPrefixo">C_--------</div>
+        <article class="result-box">
+          <div>
+            <p class="result-label">ID com prefixo</p>
+            <output class="result-value" id="idPrefixo">C_--------</output>
           </div>
-          <button class="copy-btn" onclick="copiarTexto('idPrefixo')">
-            📋 Copiar
-          </button>
-        </div>
+          <button class="copy-btn" type="button" data-copy-target="idPrefixo">Copiar</button>
+        </article>
       </div>
 
-      <p class="info-text">
-        Obs: Se o ID já existir, remova caracteres do sobrenome.
-      </p>
-    </div>
-  </div>
+      <p class="info-text">Se o ID já existir, remova caracteres do sobrenome e gere novamente.</p>
+    </section>
+  </main>
 
   <script src="geracaoid.js"></script>
 </body>
 </html>
-

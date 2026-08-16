@@ -3,127 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equipe Legado</title> 
+  <meta name="theme-color" content="#061f57">
+  <title>Gerador de Senhas - Equipe Legado</title>
   <link rel="stylesheet" href="senha.css">
-  <style>
-    /* Estilo para o botão HOME */
-    .home-link {
-      margin-top: 10px;
-    }
-
-    .home-link a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff; /* azul */
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .home-link a:hover {
-      background-color: #0056b3; /* azul mais escuro */
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>📅 Cálculo de Validade</h1> 
-      
-      <!-- Botão HOME abaixo do título -->
-      <div class="home-link">
-        <a href="./index.html" data-page="home" class="active">🏠 HOME</a>
-      </div>
+  <main class="container">
+    <header class="page-header">
+      <a class="home-link" href="./index.html">← Voltar ao início</a>
+      <h1>Gerador de Senhas</h1>
+      <p>Crie senhas seguras para os seus acessos.</p>
     </header>
 
-    <!-- Seção: Senha Gerada -->
-    <div class="section">
-      <div class="section-title">Senha Gerada</div>
-      <div class="password-display empty" id="passwordDisplay">
-        Nenhuma senha gerada ainda
-      </div>
+    <section class="card" aria-labelledby="random-title">
+      <h2 id="random-title">Senha aleatória</h2>
+      <output class="password-display empty" id="passwordDisplay">Nenhuma senha gerada ainda</output>
       <div class="button-group">
-        <button class="btn-generate" onclick="gerarSenha()">🎲 Gerar Senha</button>
-        <button class="btn-copy" id="copyBtn" onclick="copiarSenha()" disabled>📋 Copiar</button>
+        <button class="btn-primary" id="generateBtn" type="button">Gerar senha</button>
+        <button class="btn-secondary" id="copyBtn" type="button" disabled>Copiar</button>
       </div>
-    </div>
+    </section>
 
-    <!-- Seção: Configurações -->
-    <div class="section">
-      <div class="section-title">Configurações da Senha</div>
-      
+    <section class="card" aria-labelledby="settings-title">
+      <h2 id="settings-title">Configurações</h2>
       <div class="form-group">
-        <label>Tamanho da Senha: <span class="length-display" id="lengthValue">12</span></label>
+        <label for="passwordLength">Tamanho: <strong id="lengthValue">12</strong> caracteres</label>
         <div class="range-container">
-          <span style="color:#000;font-size:0.9em;">4</span>
-          <input type="range" id="passwordLength" min="4" max="20" value="12" oninput="atualizarTamanho()">
-          <span style="color:#000;font-size:0.9em;">20</span>
+          <span>4</span>
+          <input type="range" id="passwordLength" min="4" max="32" value="12">
+          <span>32</span>
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Incluir Caracteres:</label>
-        <div class="checkbox-group">
-          <div class="checkbox-item">
-            <input type="checkbox" id="includeUppercase" checked>
-            <label for="includeUppercase">Maiúsculas (A-Z)</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="includeLowercase" checked>
-            <label for="includeLowercase">Minúsculas (a-z)</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="includeNumbers" checked>
-            <label for="includeNumbers">Números (0-9)</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="includeSpecial" checked>
-            <label for="includeSpecial">Especiais (!@#$%&*)</label>
-          </div>
-        </div>
-      </div>
-    </div>
+      <fieldset class="checkbox-group">
+        <legend>Incluir caracteres</legend>
+        <label><input type="checkbox" id="includeUppercase" checked> Maiúsculas (A-Z)</label>
+        <label><input type="checkbox" id="includeLowercase" checked> Minúsculas (a-z)</label>
+        <label><input type="checkbox" id="includeNumbers" checked> Números (0-9)</label>
+        <label><input type="checkbox" id="includeSpecial" checked> Especiais (!@#$%&*)</label>
+      </fieldset>
+    </section>
 
-    <!-- Seção: Senha Baseada em Referência -->
-    <div class="section">
-      <div class="section-title">Senha Baseada em Referência</div>
-      
+    <section class="card" aria-labelledby="reference-title">
+      <h2 id="reference-title">Senha com referência</h2>
       <div class="form-group">
-        <label>Tipo de Prefixo:</label>
-        <div class="checkbox-group">
-          <div class="checkbox-item">
-            <input type="radio" id="prefixoSRV" name="prefixo" value="SRV" checked>
-            <label for="prefixoSRV">SRV</label>
-          </div>
-          <div class="checkbox-item">
-            <input type="radio" id="prefixoSYS" name="prefixo" value="SYS">
-            <label for="prefixoSYS">SYS</label>
-          </div>
+        <label>Prefixo</label>
+        <div class="radio-group">
+          <label><input type="radio" name="prefixo" value="SRV" checked> SRV</label>
+          <label><input type="radio" name="prefixo" value="SYS"> SYS</label>
         </div>
       </div>
       <div class="form-group">
-        <label for="referenceInput">Dados de Referência:</label>
-        <input type="text" id="referenceInput" placeholder="Ex: SRV_PPDS, SYS_DATABASE, etc." oninput="gerarSenhaReferencia()">
+        <label for="referenceInput">Dados de referência</label>
+        <input type="text" id="referenceInput" placeholder="Ex.: PPDS ou DATABASE" autocomplete="off">
       </div>
-
-      <div class="password-display empty" id="passwordReferenceDisplay">
-        Digite uma referência para gerar
-      </div>
-
+      <output class="password-display empty" id="passwordReferenceDisplay">Digite uma referência para gerar</output>
       <div class="button-group">
-        <button class="btn-generate" onclick="gerarSenhaReferencia()">🎲 Gerar Senha com Referência</button>
-        <button class="btn-copy" id="copyBtnReference" onclick="copiarSenhaReferencia()" disabled>📋 Copiar</button>
+        <button class="btn-primary" id="generateReferenceBtn" type="button">Gerar com referência</button>
+        <button class="btn-secondary" id="copyBtnReference" type="button" disabled>Copiar</button>
       </div>
+    </section>
+  </main>
 
-      <div class="info-box">
-        💡 Selecione SRV ou SYS, digite a referência (ex: SRV_PPDS) e gere uma senha no formato: 
-        <strong>SRV@brp#45ppDs2</strong>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="senha.js"></script>
 </body>
 </html>

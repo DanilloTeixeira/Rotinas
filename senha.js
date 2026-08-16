@@ -1,128 +1,110 @@
-// ===========================================
-// 🔐 GERADOR DE SENHAS
-// ===========================================
-function atualizarTamanho() {
-  const valor = document.getElementById('passwordLength').value;
-  document.getElementById('lengthValue').textContent = valor;
-}
+const random = (max) => {
+  const values = new Uint32Array(1);
+  crypto.getRandomValues(values);
+  return values[0] % max;
+};
 
-function gerarSenhaAleatoria(tamanho, configs) {
-  const maiusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const minusculas = 'abcdefghijklmnopqrstuvwxyz';
-  const numeros = '0123456789';
-  const especiais = '!@#$%&*';
-  
-  let senha = [];
-  let caracteresDisponiveis = '';
-  let tiposObrigatorios = [];
-
-  if (configs.maiusculas) { tiposObrigatorios.push(maiusculas); caracteresDisponiveis += maiusculas; }
-  if (configs.minusculas) { tiposObrigatorios.push(minusculas); caracteresDisponiveis += minusculas; }
-  if (configs.numeros) { tiposObrigatorios.push(numeros); caracteresDisponiveis += numeros; }
-  if (configs.especiais) { tiposObrigatorios.push(especiais); caracteresDisponiveis += especiais; }
-
-  // Garante pelo menos 1 caractere de cada tipo
-  tiposObrigatorios.forEach(tipo => senha.push(tipo[Math.floor(Math.random() * tipo.length)]));
-
-  for (let i = senha.length; i < tamanho; i++) {
-    senha.push(caracteresDisponiveis[Math.floor(Math.random() * caracteresDisponiveis.length)]);
+const shuffle = (items) => {
+  for (let index = items.length - 1; index > 0; index -= 1) {
+    const otherIndex = random(index + 1);
+    [items[index], items[otherIndex]] = [items[otherIndex], items[index]];
   }
+  return items;
+};
 
-  return senha.sort(() => Math.random() - 0.5).join('');
-}
-
-function gerarSenha() {
-  const tamanho = parseInt(document.getElementById('passwordLength').value);
-  const configs = {
-    maiusculas: document.getElementById('includeUppercase').checked,
-    minusculas: document.getElementById('includeLowercase').checked,
-    numeros: document.getElementById('includeNumbers').checked,
-    especiais: document.getElementById('includeSpecial').checked
-  };
-
-  if (!configs.maiusculas && !configs.minusculas && !configs.numeros && !configs.especiais) {
-    return alert('⚠️ Selecione pelo menos um tipo de caractere!');
-  }
-
-  const tiposSelecionados = Object.values(configs).filter(Boolean).length;
-  if (tamanho < tiposSelecionados) {
-    return alert(`⚠️ A senha deve ter no mínimo ${tiposSelecionados} caracteres!`);
-  }
-
-  const senha = gerarSenhaAleatoria(tamanho, configs);
-
-  const display = document.getElementById('passwordDisplay');
-  display.textContent = senha;
-  display.classList.remove('empty');
-  document.getElementById('copyBtn').disabled = false;
-}
-
-function copiarSenha() {
-  const senha = document.getElementById('passwordDisplay').textContent;
-  if (!senha || senha === 'Nenhuma senha gerada ainda') return;
-
-  navigator.clipboard.writeText(senha).then(() => {
-    const botao = document.getElementById('copyBtn');
-    const textoOriginal = botao.innerHTML;
-    botao.innerHTML = '✓ Copiado!';
-    botao.classList.add('copied');
-    setTimeout(() => {
-      botao.innerHTML = textoOriginal;
-      botao.classList.remove('copied');
-    }, 2000);
-  }).catch(() => alert('Erro ao copiar a senha.'));
-}
-
-// ===========================================
-// 🔡 SENHA POR REFERÊNCIA + PREFIXO
-// ===========================================
-function gerarSenhaReferencia() {
-  const referencia = document.getElementById('referenceInput').value.trim();
-  const prefixoSelecionado = document.querySelector('input[name="prefixo"]:checked').value;
-  const display = document.getElementById('passwordReferenceDisplay');
-
-  if (!referencia) {
-    display.textContent = 'Digite uma referência para gerar';
-    display.classList.add('empty');
-    document.getElementById('copyBtnReference').disabled = true;
+const copyText = async (value) => {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
     return;
   }
 
-  const tamanhoSenha = 12;
-  const maiusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const minusculas = 'abcdefghijklmnopqrstuvwxyz';
-  const numeros = '0123456789';
-  const especiais = '@#$%&*!';
+  const textArea = document.createElement('textarea');
+  textArea.value = value;
+  document.body.append(textArea);
+  textArea.select();
+  document.execCommand('copy');
+  textArea.remove();
+};
 
-  const todos = maiusculas + minusculas + numeros + especiais;
-  let senha = [];
+const setDisplay = (display, button, password) => {
+  display.textContent = password;
+  display.classList.remove('empty');
+  button.disabled = false;
+};
 
-  for (let i = 0; i < tamanhoSenha; i++) {
-    senha.push(todos[Math.floor(Math.random() * todos.length)]);
+const copyPassword = async (display, button) => {
+  if (display.classList.contains('empty')) return;
+  const originalText = button.textContent;
+
+  try {
+    await copyText(display.textContent);
+    button.textContent = 'Copiado!';
+  } catch {
+    button.textContent = 'Não foi possível copiar';
   }
 
-  const senhaFinal = prefixoSelecionado + senha.sort(() => Math.random() - 0.5).join('');
-  display.textContent = senhaFinal;
-  document.getElementById('copyBtnReference').disabled = false;
-}
+  setTimeout(() => { button.textContent = originalText; }, 1800);
+};
 
-function copiarSenhaReferencia() {
-  const senha = document.getElementById('passwordReferenceDisplay').textContent;
-  if (senha === 'Digite uma referência para gerar') return;
+document.addEventListener('DOMContentLoaded', () => {
+  const elements = {
+    length: document.querySelector('#passwordLength'),
+    lengthValue: document.querySelector('#lengthValue'),
+    uppercase: document.querySelector('#includeUppercase'),
+    lowercase: document.querySelector('#includeLowercase'),
+    numbers: document.querySelector('#includeNumbers'),
+    special: document.querySelector('#includeSpecial'),
+    display: document.querySelector('#passwordDisplay'),
+    copy: document.querySelector('#copyBtn'),
+    reference: document.querySelector('#referenceInput'),
+    referenceDisplay: document.querySelector('#passwordReferenceDisplay'),
+    referenceCopy: document.querySelector('#copyBtnReference'),
+  };
 
-  navigator.clipboard.writeText(senha).then(() => {
-    const botao = document.getElementById('copyBtnReference');
-    const textoOriginal = botao.innerHTML;
-    botao.innerHTML = '✓ Copiado!';
-    botao.classList.add('copied');
-    setTimeout(() => {
-      botao.innerHTML = textoOriginal;
-      botao.classList.remove('copied');
-    }, 2000);
-  }).catch(() => alert('Erro ao copiar a senha.'));
-}
+  const updateLength = () => { elements.lengthValue.textContent = elements.length.value; };
 
-// Eventos automáticos
-document.querySelectorAll('input[name="prefixo"]').forEach(radio =>
-  radio.addEventListener('change', gerarSenhaReferencia)
-);
+  const generateRandomPassword = () => {
+    const options = [
+      [elements.uppercase.checked, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'],
+      [elements.lowercase.checked, 'abcdefghijklmnopqrstuvwxyz'],
+      [elements.numbers.checked, '0123456789'],
+      [elements.special.checked, '!@#$%&*'],
+    ].filter(([enabled]) => enabled).map(([, characters]) => characters);
+
+    if (!options.length) {
+      alert('Selecione pelo menos um tipo de caractere.');
+      return;
+    }
+
+    const length = Number(elements.length.value);
+    const password = options.map((characters) => characters[random(characters.length)]);
+    const allCharacters = options.join('');
+    while (password.length < length) password.push(allCharacters[random(allCharacters.length)]);
+
+    setDisplay(elements.display, elements.copy, shuffle(password).join(''));
+  };
+
+  const generateReferencePassword = () => {
+    const reference = elements.reference.value.trim();
+    if (!reference) {
+      elements.referenceDisplay.textContent = 'Digite uma referência para gerar';
+      elements.referenceDisplay.classList.add('empty');
+      elements.referenceCopy.disabled = true;
+      return;
+    }
+
+    const prefix = document.querySelector('input[name="prefixo"]:checked').value;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*';
+    const suffix = Array.from({ length: 12 }, () => characters[random(characters.length)]).join('');
+    setDisplay(elements.referenceDisplay, elements.referenceCopy, `${prefix}_${reference}_${suffix}`);
+  };
+
+  elements.length.addEventListener('input', updateLength);
+  document.querySelector('#generateBtn').addEventListener('click', generateRandomPassword);
+  elements.copy.addEventListener('click', () => copyPassword(elements.display, elements.copy));
+  document.querySelector('#generateReferenceBtn').addEventListener('click', generateReferencePassword);
+  elements.referenceCopy.addEventListener('click', () => copyPassword(elements.referenceDisplay, elements.referenceCopy));
+  elements.reference.addEventListener('input', generateReferencePassword);
+  document.querySelectorAll('input[name="prefixo"]').forEach((radio) => radio.addEventListener('change', generateReferencePassword));
+  updateLength();
+});

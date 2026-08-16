@@ -1,66 +1,101 @@
+:root {
+  --blue-dark: #041a4a;
+  --blue: #0b4fb8;
+  --text: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
+  min-width: 320px;
+  background: #000;
+  color: var(--text);
   font-family: Arial, sans-serif;
-  background: #000000;
 }
 
 .app-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.media-card1 {
-  background: url(https://i.pinimg.com/videos/thumbnails/originals/67/3b/23/673b230a70bf4bd0ed9d7d8ac661646a.0000000.jpg) center/cover;
-  height: 970px;
-  width: 100%;
-  
-
-}
-
-/* Sidebar */
 .sidebar {
-  width: 240px;
-  background-color: #eba40b;
-  color: #000000;
-  padding: 20px;
+  width: 260px;
+  flex-shrink: 0;
+  padding: 24px 16px;
+  background: linear-gradient(180deg, var(--blue) 0%, var(--blue-dark) 100%);
+  box-shadow: 3px 0 18px rgba(0, 0, 0, 0.35);
 }
 
-.sidebar h2 {
-  margin-top: 0;
-  text-align: center;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin: 10px 0;
-}
-
-.sidebar a {
-  display: block;
-  color: #000000;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 4px 28px;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 700;
   text-decoration: none;
-  padding: 10px;
-  border-radius: 6px;
-  transition: 0.3s;
 }
 
-.sidebar a:hover,
-.sidebar a.active {
-  background-color: #1f1e1e;
-  color: #fff;
+.brand img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-/* Conteúdo principal */
+.navigation-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation-list a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.96rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.navigation-list a:hover,
+.navigation-list a:focus-visible,
+.navigation-list a.active {
+  background: rgba(255, 255, 255, 0.18);
+  outline: none;
+}
+
+.navigation-list a:hover { transform: translateX(3px); }
+
 .content {
+  display: flex;
   flex: 1;
-  padding: 30px;
-  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px;
+  background: radial-gradient(circle at center, #000 68%);
 }
 
-h1 {
-  color: #000000;
+.main-logo {
+  display: block;
+  width: min(440px, 72vw);
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .app-container { flex-direction: column; }
+  .sidebar { width: 100%; padding: 16px; }
+  .brand { margin-bottom: 16px; }
+  .navigation-list { display: flex; overflow-x: auto; }
+  .navigation-list a { white-space: nowrap; }
+  .content { min-height: 65vh; padding: 24px; }
+  .main-logo { width: min(400px, 82vw); }
 }
